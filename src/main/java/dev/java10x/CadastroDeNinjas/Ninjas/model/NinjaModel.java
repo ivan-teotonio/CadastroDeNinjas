@@ -1,10 +1,14 @@
-package dev.java10x.CadastroDeNinjas.model;
+package dev.java10x.CadastroDeNinjas.Ninjas.model;
 
+import dev.java10x.CadastroDeNinjas.Missoes.MissoesModel.MissoesModel;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import scala.collection.immutable.List;
 
 @Entity
 @Table(name = "tb_cadastro")
@@ -17,12 +21,17 @@ public class NinjaModel {
     private String email;
     private int idade;
 
+    //um ninja tem uma unica missão
+    @ManyToOne 
+    @JoinColumn(name = "missoes_id")
+    private MissoesModel missoes;
+
     public NinjaModel() {}
 
     public NinjaModel(String nome, String email, int idade) {
         this.nome = nome;
         this.email = email;
-        this.idade = idade;
+        this.idade = idade; 
     }
 
     public void setNome(String nome) {
